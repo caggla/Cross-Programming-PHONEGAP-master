@@ -1,0 +1,173 @@
+
+<html>
+<head>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript">
+	function main(){
+		window.open("mainPage.html");
+	}
+	function back(){
+		window.open("mainPage.html");
+	}
+	var name = localStorage.getItem("name");
+	var surname = localStorage.getItem("surname"); 
+	var bdate = localStorage.getItem("bdate"); 
+	var mail = localStorage.getItem("mail"); 
+	var pnumber = localStorage.getItem("pnumber");
+	var userId = localStorage.getItem("key");
+	$(document).on("click", "#driver", function(){
+		
+		var dataString="&userId="+userId+"&submit=";
+
+		$.ajax({
+			type: "POST",
+			url:"http://172.25.7.60:2234/myEventsDriver.php",
+			data: dataString,
+			crossDomain: true,
+			cache: false,
+
+			success: function(data){
+				
+				if(data!="Not Found")
+				{
+					
+					var res = data.split(/~~/);
+					var from = res[0].split(/_/);
+					var where = res[1].split(/_/);
+					var dates = res[2].split(/_/);
+					var times = res[3].split(/_/);
+					var nof = res[4].split(/_/);
+					var carModels = res[5].split(/_/);
+					
+
+					localStorage.setItem("fromDriver", from);
+					localStorage.setItem("whereDriver", where);
+					localStorage.setItem("datesDriver", dates);
+					localStorage.setItem("timesDriver", times);
+					localStorage.setItem("nofDriver", nof);
+					localStorage.setItem("carModelsDriver", carModels);
+					
+					window.open("ViewEvent.html");	
+					
+
+				}else{
+					
+					window.alert("Not Found");
+				}
+			}
+		});
+
+return false;
+
+
+});
+$(document).on("click", "#passenger", function(){
+		
+		var dataString="&userId="+userId+"&submit=";
+
+		$.ajax({
+			type: "POST",
+			url:"http://172.25.7.60:2234/myEventsPassenger.php",
+			data: dataString,
+			crossDomain: true,
+			cache: false,
+
+			success: function(data){
+
+				if(data!="Not Found")
+				{
+					var res = data.split(/~~/);
+					var from = res[0].split(/_/);
+					var where = res[1].split(/_/);
+					var dates = res[2].split(/_/);
+					var times = res[3].split(/_/);
+					var nof = res[4].split(/_/);
+					var carModels = res[5].split(/_/);
+					var foods = res[6].split(/_/);
+					var musics = res[7].split(/_/);
+					var smokes = res[8].split(/_/);
+
+					localStorage.setItem("fromPassenger", from);
+					localStorage.setItem("wherePassenger", where);
+					localStorage.setItem("datesPassenger", dates);
+					localStorage.setItem("timesPassenger", times);
+					localStorage.setItem("nofPassenger", nof);
+					localStorage.setItem("carModelsPassenger", carModels);
+					localStorage.setItem("foodsPassenger", foods);
+					localStorage.setItem("musicsPassenger", musics);
+					localStorage.setItem("smokesPassenger", smokes);
+
+					window.location.replace("viewEventPassenger.html");
+
+				}else{
+					window.alert("Not Found");
+				}
+			}
+		});
+
+return false;
+
+
+});
+</script>
+
+<style>
+.ui-icon-user {
+	background-color: transparent;
+	width: 150px;
+	height: 150px;
+}
+</style>
+
+</head>
+<body>
+
+	<div data-role="header">
+		<h1>Profile</h1>
+	</div>
+
+	<div data-role="page" id="page">
+		<a href="#" class="ui-btn ui-corner-all ui-icon-user ui-btn-icon-notext" >User Icon</a>
+
+
+		<div data-role="main" class="ui-content">
+
+			<form method="post" action="">
+				<div class="ui-field-contain">
+					<label for="name">Name:</label><script type="text/javascript">document.write(name);</script><br></br>
+
+					<label for="surname">Surname:</label><script type="text/javascript">document.write(surname);</script><br></br>
+
+					<label for="bday">Date of Birth:</label><script type="text/javascript">document.write(bdate);</script><br></br>
+
+					<label for="email">E-mail:</label><script type="text/javascript">document.write(mail);</script><br></br>
+
+					<label for="phonenumber">Phone Number:</label><script type="text/javascript">document.write(pnumber);</script><br></br>
+
+				</div>
+
+
+				<button type="submit" data-inline="true" name="driver" id="driver" >My Events As Driver</button>
+				<button type="submit" data-inline="true" name="passenger" id="passenger" >My Events As Passenger</button>
+
+
+			</form>
+
+
+		</div>
+
+
+		<div data-role="navbar"  style = "bottom: 0; width:100%; position: fixed; z-index: 1000;">
+			<ul>
+				<li><a href="#" data-icon="home" onclick = "main()">Home</a></li>
+				<li><a href="#" data-icon="back" onclick = "back()">Back</a></li>
+				<!-- <li><a href="#" data-icon="user" onclick = "profile()">Profile</a></li> -->
+			</ul>
+		</div>
+
+	</div> 
+
+</body>
+</html>

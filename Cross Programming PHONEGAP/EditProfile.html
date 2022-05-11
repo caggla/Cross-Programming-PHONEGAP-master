@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+  <div data-role="page" id="page" data-theme="b">
+    <div data-role="header">
+      <h1>Edit Profile</h1>
+    </div>
+
+    <div data-role="main" class="ui-content" style = "margin-bottom:5%;">
+      <form method="post" action="/action_page_post.php">
+        <div class="ui-field-contain">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" pattern = "[A-Za-z]*">
+          <label for="surname">Surname:</label>
+          <input type="text" name="surname" id="surname" pattern = "[A-Za-z]*">   		
+          <label for="bday">Date of Birth:</label>
+          <input type="date" name="bday" id="bday">
+          <label for="email">E-mail:</label>
+          <input type="email" name="email-1" id="email-1" placeholder="Your email..">
+          <label for="occupation">Occupation/Caption:</label>
+          <input type="text" name="occupation" id="occupation">
+          <label for="department/branch">Department/Branch:</label>
+          <input type="text" name="department/branch" id="department/branch">
+          <label for="phonenumber">Phone Number:</label>
+          <input type="text" name="phonenumber" id="phonenumber" pattern = "[0-9]*">
+
+          <input type="checkbox" name="checkbox-mini-1" id="checkbox-mini-1" data-mini="true">
+          <label for="checkbox-mini-1">Driver</label>
+        </div>
+        <button type="submit" data-inline="true" >Edit</button>
+      </form>
+    </div>
+    <div data-role="navbar" style = "bottom: 0; position: fixed; width: 100%;">
+      <ul>
+        <li><a href="#" data-icon="home" onclick = "main()">Home</a></li>
+        <li><a href="#" data-icon="back" onclick = "main()">Back</a></li>
+        <li><a href="#" data-icon="user" onclick = "profile()">Profile</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div> 
+
+</body>
+</html>

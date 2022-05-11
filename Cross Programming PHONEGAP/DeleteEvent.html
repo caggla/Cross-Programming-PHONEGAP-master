@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script type="text/javascript">
+  function main(){
+    window.open("mainPage.html");}
+    function add(){
+      window.open("AddComment.html");
+    }
+
+    </script>
+  </head>
+  <body>
+
+    <div data-role="page" id="page" data-theme="b">
+      <div data-role="header">
+        <h1>MY ACTIVE EVENTS</h1>
+      </div>
+
+      <div data-role="main" class="ui-content" style = "margin-bottom:5%;">
+
+        <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="myTable">
+          <thead>
+            <tr>
+              <th data-priority="1">Starting Point</th>
+              <th data-priority="2">Destination</th>
+              <th data-priority="3">Date</th>
+              <th data-priority="4">Smoke</th>
+              <th data-priority="5">Food/Beverage</th>
+              <th data-priority="6"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td> 
+               <form>
+                    		<input type="checkbox" name="checkbox-mini-1" id="checkbox-mini-1" data-mini="true">
+                    		<label for="checkbox-mini-0"></label>
+              </form>
+            </td>
+
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> 
+             <form>
+                  		<input type="checkbox" name="checkbox-mini-2" id="checkbox-mini-2" data-mini="true">
+                  		<label for="checkbox-mini-0"></label>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td> 
+           <form>
+                		<input type="checkbox" name="checkbox-mini-3" id="checkbox-mini-3" data-mini="true">
+                		<label for="checkbox-mini-0"></label>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td> 
+         <form>
+              		<input type="checkbox" name="checkbox-mini-4" id="checkbox-mini-4" data-mini="true">
+              		<label for="checkbox-mini-0"></label>
+        </form>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<input type="button" data-inline="true" value="Delete">
+
+</div>
+
+<div data-role="navbar" style = "bottom: 0; position: fixed; width: 100%;">
+  <ul>
+    <li><a href="#" data-icon="home" onclick = "main()">Home</a></li>
+    <li><a href="#" data-icon="back" onclick = "main()">Back</a></li>
+    <li><a href="#" data-icon="user" onclick = "profile()">Profile</a></li>
+  </ul>
+</div>
+</div>
+
+</div> 
+
+</body>
+</html>

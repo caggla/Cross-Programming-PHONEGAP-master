@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script type="text/javascript">
+  var from = localStorage.getItem("from").split(",");
+  var where = localStorage.getItem("where").split(",");
+  var dates = localStorage.getItem("dates").split(",");
+  var times = localStorage.getItem("times").split(",");
+  var nof = localStorage.getItem("nof").split(",");
+  var carModels = localStorage.getItem("carModels").split(",");
+  var foods = localStorage.getItem("foods").split(",");
+  var musics = localStorage.getItem("musics").split(",");
+  var smokes = localStorage.getItem("smokes").split(",");
+  var eIds = localStorage.getItem("eIds").split(",");
+  var userId = localStorage.getItem("key");
+  function main(){
+    window.open("mainPage.html");
+  }
+  function profile(){
+    window.open("Profile.html");
+  }
+  $(document).ready(function()
+  {
+    $('form').submit(function(){
+
+      var eventId = $('input[name="checkbox-mini-3"]:checked').val();
+
+      var dataString="&eventId="+eventId+"&userId="+userId+"&submit=";
+      if($.trim(eventId).length>0)
+
+      {
+        $.ajax({
+          type: "POST",
+          url:"http://172.25.7.60:2234/joinEvent.php",
+          data: dataString,
+          crossDomain: true,
+          cache: false,
+
+          success: function(data){
+            
+            if(data!="Failed")
+            {
+              alert(data);
+             window.location.replace("mainPage.html");
+
+            }else{
+              alert("Failed");
+            }
+          }
+        });
+}
+else
+  alert("You need to choose one event!");
+return false;
+
+});
+});
+
+</script>
+</head>
+<body>
+
+  <div data-role="page" id="page" >
+    <div data-role="header">
+      <h1>Event List</h1>
+    </div>
+
+    <div data-role="main" class="ui-content" style ="margin-bottom:5%;">
+      <form>
+        <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="myTable">
+          <thead>
+            <tr>
+              <th data-priority="1">Starting Point</th>
+              <th data-priority="2">Destination</th>
+              <th data-priority="3">Date</th>
+              <th data-priority="4">Time</th>
+              <th data-priority="5">Empty Seats</th>
+              <th data-priority="6">Car Model</th>
+              <th data-priority="7">Food/Beverage</th>
+              <th data-priority="8">Music Type</th>
+              <th data-priority="9">Smoke</th>
+              <th data-priority="11"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <script type="text/javascript">
+            var tablo = "";
+            for(var i = 0; i < eIds.length-1; i++){
+              tablo += "<tr> <td>"+ from[i] +"</td>" + "<td>"+ where[i] +"</td>" + "<td>"+ dates[i] +"</td>" + "<td>"+ times[i] +"</td>" + "<td>"+ nof[i] +"</td>" + "<td>"+ carModels[i] +"</td>"+ "<td>"+ foods[i] +"</td>" + "<td>"+ musics[i] +"</td>" + "<td>"+ smokes[i] +"</td>" + "<td>"+"<input type='radio' value="+eIds[i]+" name='checkbox-mini-3' id='checkbox-mini-3' data-mini='true'>"+"</td>"+"</tr>";
+            }
+            document.write(tablo);
+            </script>
+
+          </tbody>
+        </table>
+
+        <input type="submit" data-inline="true" value="Join" id = "submit" name = "submit">
+      </form>
+    </div>
+
+    <div data-role="navbar" style = "bottom: 0; position: fixed; width: 100%;">
+      <ul>
+        <li><a href="#" data-icon="home" onclick = "main()">Home</a></li>
+        <li><a href="#" data-icon="back" onclick = "main()">Back</a></li>
+        <li><a href="#" data-icon="user" onclick = "profile()">Profile</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div> 
+
+</body>
+</html>

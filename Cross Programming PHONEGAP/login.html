@@ -1,0 +1,89 @@
+<html>
+<head>
+	<link rel="stylesheet" href="jquery.mobile-1.4.5.min.css" />
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript">
+	
+	
+	$(document).ready(function()
+	{
+		
+		$('form').submit(function(){
+
+			var email2=$("#email2").val();
+			var password2=$("#password2").val();
+			
+
+			var dataString="&email2="+email2+"&password2="+password2+"&submit=";
+			if($.trim(email2).length>0 & $.trim(password2).length>0)
+			{
+				$.ajax({
+					
+					url:"http://172.25.7.60:2234/login.php",
+					
+					type: "POST",
+					data: dataString,
+					crossDomain: true,
+					cache: false,
+
+					success: function(data){
+						
+						if(data!="Invalid ID Password")
+						{
+							var key = data.split("_");
+							
+							localStorage.setItem("key", key[0]);
+							localStorage.setItem("name", key[1]);
+							localStorage.setItem("surname", key[2]);
+							localStorage.setItem("bdate", key[3]);
+							localStorage.setItem("mail", key[4]);
+							localStorage.setItem("pnumber", key[5]);
+								
+							window.location.replace("mainPage.html");
+
+						}else{
+							alert("Invalid ID Password");
+						}
+
+					}
+				});
+			}else
+			alert("Do not leave empty place!");
+			return false;
+			
+			
+		});
+	});
+	function back(){
+		window.open("index.html");
+	}
+	</script>
+	<style type="text/css">
+
+
+	</style>
+</head>
+<body>
+
+	<form style = "width:50%; margin-left:25%; margin-top:15%; margin-right:15%; margin-bottom:5%;">
+		
+		<div class="result"></div>
+		<label for="email-2">Username:</label>
+		<div style = "display: inline-block; width:100%"><input type="email" data-clear-btn="true" name="email2" id="email2" value=""></div>
+
+		
+		<label for="password-2">Password:</label>
+		<input type="password" data-clear-btn="true" name="password2" id="password2" value="" autocomplete="off">
+		<input type="submit" id="submit" name="submit" value = "Log-in" >
+	</form>
+
+	<div data-role="navbar" id="navigation" style = "bottom: 0; position: fixed; width: 100%;">
+		<ul>
+			<li><a href="#" data-icon="back" onclick = "back()" >Back</a></li>
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>

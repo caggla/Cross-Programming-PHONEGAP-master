@@ -1,0 +1,117 @@
+<html>
+<head>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript">
+	function main(){
+		window.open("mainPage.html");
+	}
+	function profile(){
+		window.open("Profile.html");
+	}
+	$(document).ready(function()
+	{
+		$('form').submit(function(){
+
+			var selectnative1=$("#selectnative1").val();
+			var selectnative2=$("#selectnative2").val();
+			var date1=$("#date1").val();
+			
+
+			var dataString="&selectnative1="+selectnative1+"&selectnative2="+selectnative2+"&date1="+date1+"&submit=";
+			if($.trim(selectnative1).length>0 & $.trim(selectnative2).length>0 & $.trim(date1).length>0 )
+
+			{
+				$.ajax({
+					type: "POST",
+					url:/*"searchEvent.php",*/"http://172.25.7.60:2234/searchEvent.php",
+					data: dataString,
+					crossDomain: true,
+					cache: false,
+
+					success: function(data){
+						
+						if(data!="Not Found")
+						{
+							var res = data.split(/~~/);
+							var from = res[0].split(/_/);
+							var where = res[1].split(/_/);
+							var dates = res[2].split(/_/);
+							var times = res[3].split(/_/);
+							var nof = res[4].split(/_/);
+							var carModels = res[5].split(/_/);
+							var foods = res[6].split(/_/);
+							var musics = res[7].split(/_/);
+							var smokes = res[8].split(/_/);
+							var eIds = res[9].split(/_/);
+							localStorage.setItem("from", from);
+							localStorage.setItem("where", where);
+							localStorage.setItem("dates", dates);
+							localStorage.setItem("times", times);
+							localStorage.setItem("nof", nof);
+							localStorage.setItem("carModels", carModels);
+							localStorage.setItem("foods", foods);
+							localStorage.setItem("musics", musics);
+							localStorage.setItem("smokes", smokes);
+							localStorage.setItem("eIds", eIds);
+							window.location.replace("EventList.html");
+
+						}else{
+							window.alert("Not Found");
+						}
+					}
+				});
+}
+else
+	alert("Do not leave empty place!");
+return false;
+
+});
+});
+</script>
+<style type="text/css">
+
+</style>	
+</head>
+<body>
+
+	<form style = "width:50%; margin-left:25%; margin-right:25%; margin-top:5%; margin-bottom:5%;">
+		<label for="selectnative1">From Where:</label>
+		<select name="selectnative1" id="selectnative1">
+			        		<option value=""></option>
+			        		<option value="Esenboga Campus">Esenboga Campus</option>
+			        		<option value="Etlik West Campus">Etlik West Campus</option>
+			        		<option value="Etlik East Campus">Etlik East Campus</option>
+			        		<option value="Cubuk Campus">Cubuk Campus</option>
+			<option value="Cinnah Campus">Cinnah Campus</option>
+			<option value="Ovacik Campus">Ovacik Campus</option>
+			<option value="Ulus Campus">Ulus Campus</option>
+			<option value="Bilkent Campus">Bilkent Campus</option>
+		         	</select> 
+
+		<label for="selectnative2">To Where:</label>
+		<select name="selectnative2" id="selectnative2">
+			<option value=""></option>
+			        	<option value="Esenboga Campus">Esenboga Campus</option>
+			        		<option value="Etlik West Campus">Etlik West Campus</option>
+			        		<option value="Etlik East Campus">Etlik East Campus</option>
+			        		<option value="Cubuk Campus">Cubuk Campus</option>
+			<option value="Cinnah Campus">Cinnah Campus</option>
+			<option value="Ovacik Campus">Ovacik Campus</option>
+			<option value="Ulus Campus">Ulus Campus</option>
+			<option value="Bilkent Campus">Bilkent Campus</option>
+		         	</select>
+		<label for="date1">Date:</label>
+		<input type="date" data-clear-btn="false" name="date1" id="date1" >
+		<button type = "submit" name="submit" id="submit" >Search</button>
+	</form>
+	<div data-role="navbar" style = "bottom: 0; position: fixed; width: 100%;">
+		<ul>
+			<li><a href="#" data-icon="home" onclick = "main()">Home</a></li>
+			<li><a href="#" data-icon="back" onclick = "main()">Back</a></li>
+			<li><a href="#" data-icon="user" onclick = "profile()">Profile</a></li>
+		</ul>
+	</div>
+</body>
+</html>
